@@ -1,0 +1,14 @@
+C:\Users\danie\MiniShop\bin\Debug\net10.0\MiniShop.exe
+C:\Users\danie\MiniShop\bin\Debug\net10.0\MiniShop.deps.json
+C:\Users\danie\MiniShop\bin\Debug\net10.0\MiniShop.runtimeconfig.json
+C:\Users\danie\MiniShop\bin\Debug\net10.0\MiniShop.dll
+C:\Users\danie\MiniShop\bin\Debug\net10.0\MiniShop.pdb
+C:\Users\danie\MiniShop\obj\Debug\net10.0\MiniShop.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\danie\MiniShop\obj\Debug\net10.0\MiniShop.AssemblyInfoInputs.cache
+C:\Users\danie\MiniShop\obj\Debug\net10.0\MiniShop.AssemblyInfo.cs
+C:\Users\danie\MiniShop\obj\Debug\net10.0\MiniShop.csproj.CoreCompileInputs.cache
+C:\Users\danie\MiniShop\obj\Debug\net10.0\MiniShop.dll
+C:\Users\danie\MiniShop\obj\Debug\net10.0\refint\MiniShop.dll
+C:\Users\danie\MiniShop\obj\Debug\net10.0\MiniShop.pdb
+C:\Users\danie\MiniShop\obj\Debug\net10.0\MiniShop.genruntimeconfig.cache
+C:\Users\danie\MiniShop\obj\Debug\net10.0\ref\MiniShop.dll
