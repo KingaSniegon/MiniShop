@@ -1,14 +1,27 @@
-﻿using MiniShop.Services;
+﻿using MiniShop.Models;
+using MiniShop.Services;
 
-var shop = new ShopService();
-
-var products = shop.GetAllProducts();
-foreach (var product in products)
+class Program
 {
-    Console.WriteLine($"{product.Id}: {product.Name} - {product.Price} PLN");
+private readonly BasketService? _basketService;
+
+static void Main(string[] args)
+{
+        var productService = new ProductService();
+        var basketService = new BasketService(productService);
+        var orderService = new OrderService();
+        var shop = new ShopService(basketService, orderService, productService);
+
+        var products = productService.GetAllProducts();
+        foreach (var product in products)
+        {
+            Console.WriteLine($"{product.Id}: {product.Name} - {product.Price} PLN");
+        }
+
+        shop.AddProductsToBasket();
+        basketService.ShowBasket();
+        basketService.CalculateTotal();
+        shop.Checkout();
+        orderService.ShowOrderDetails();
 }
-shop.AddProducts();
-shop.ShowBasket();
-shop.CalculateTotal();
-shop.Checkout();
-shop.ShowOrderDetails();
+}

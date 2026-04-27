@@ -12,3 +12,4 @@ C:\Users\danie\MiniShop\obj\Debug\net10.0\refint\MiniShop.dll
 C:\Users\danie\MiniShop\obj\Debug\net10.0\MiniShop.pdb
 C:\Users\danie\MiniShop\obj\Debug\net10.0\MiniShop.genruntimeconfig.cache
 C:\Users\danie\MiniShop\obj\Debug\net10.0\ref\MiniShop.dll
+C:\Users\danie\MiniShop\obj\Debug\net10.0\MiniShop.sourcelink.json
