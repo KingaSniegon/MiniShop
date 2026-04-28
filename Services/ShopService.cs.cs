@@ -74,16 +74,19 @@ public class ShopService
             Console.WriteLine("Basket is empty. Cannot proceed to checkout.");
             return;
         }
-
+        
+        var order = new Order();
         foreach(var item in basketItems)
         {
+
             var orderItem = new OrderItem
             {
                 ProductName = item.Product.Name,
                 UnitPrice = item.Product.Price,
                 Quantity = item.Quantity
             };
-            _orderService.AddOrderItem(orderItem);
+            order.OrderItems.Add(orderItem);
         }
+        _orderService.AddOrder(order);
     }
 }
