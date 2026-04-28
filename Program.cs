@@ -12,6 +12,10 @@ static void Main(string[] args)
         var shopService = new ShopService(basketService, orderService, productService);
         var menu = new Menu(productService, basketService, orderService, shopService);
 
-        menu.ShowMenu();
+        while (menu.ShowMenu())
+        {
+            // Loop until the user chooses to exit
+        }
+        
 }
 }

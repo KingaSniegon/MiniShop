@@ -16,7 +16,7 @@ class Menu
         _shopService = shopService;
     }
 
-    public void ShowMenu()
+    public bool ShowMenu()
     {
         Console.WriteLine("Welcome to MiniShop!");
         Console.WriteLine("1. View products");
@@ -31,28 +31,28 @@ class Menu
     {
         case "1":
             _productService.ShowProducts();
-            break;
+            return true;
 
         case "2":
             _shopService.AddProductsToBasket();
-            break;
+            return true;
 
         case "3":
-            _basketService.GetBasketItems();
-            break;
+            _basketService.ShowBasket();
+            return true;
 
         case "4":
             _shopService.Checkout();
             _orderService.ShowOrderDetails();
-            break;
+            return true;
 
         case "5":
             Console.WriteLine("Thank you for shopping!");
-            break;
+            return false;
 
         default:
             Console.WriteLine("Invalid option. Please try again.");
-            break;
+            return true;
         }
     }
 }

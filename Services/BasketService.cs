@@ -61,7 +61,7 @@ public class BasketService
         }
         Console.WriteLine($"Total: {total} PLN");
     }        
-
+    
     public List<BasketItem> GetBasketItems()
     {
         return new List<BasketItem>(_basket); // zwraca nowa liste, ktora jest kopia listy _basket, dzieki temu zewnetrzne modyfikacje tej listy nie beda mialy wplywu na oryginalna liste _basket w klasie ShopService
