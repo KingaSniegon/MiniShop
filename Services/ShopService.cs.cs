@@ -7,7 +7,6 @@ namespace MiniShop.Services;
 
 public class ShopService
 {
-    //referencje do innych serwisow, czyli wskazuja na obiekty innych serwisow, dzieki temu ShopService moze korzystac z funkcjonalnosci tych serwisow (np. dodawanie do koszyka, wyswietlanie szczegolow zamowienia itp.)
     private readonly BasketService _basketService;// trzymane sa dane przekazane przez konstruktor.
     private readonly OrderService _orderService;
     private readonly ProductService _productService;

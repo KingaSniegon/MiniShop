@@ -13,14 +13,13 @@ public class BasketService
         _productService = productService;
     }
 
-    public void AddToBasket(int productId, int quantity)
+    public List<BasketItem> AddToBasket(int productId, int quantity)
     {
-        var product = _productService.GetAllProducts().FirstOrDefault(p => p.Id == productId); // szuka produktu o podanym id w liscie produktow zwracanej przez metode GetAllProducts() z serwisu ProductService
+        var product = _productService.GetAllProducts().FirstOrDefault(p => p.Id == productId); // szuka produktu o podanym Id w liscie produktow dostepnych w sklepie
         
-        if(product == null)
+        if (product == null)
         {
-            Console.WriteLine("Product not found.");
-            return;
+            throw new ArgumentException($"Product with id {productId} doesn't exist");
         }
 
         var basketItem = _basket.FirstOrDefault(b => b.Product.Id == productId); // szuka w koszyku przedmiotu, ktory jest tym samym produktem co znaleziony produkt
@@ -33,25 +32,10 @@ public class BasketService
         {
             basketItem.Quantity += quantity;
         }
-    }    
+        return _basket;
+    }      
 
-    public void ShowBasket()
-    {
-        Console.WriteLine("Basket includes: ");
-
-        if (_basket.Count == 0)
-        {
-            Console.WriteLine("Basket is empty.");
-            return;
-        }
-
-        foreach (var item in _basket)
-        {
-            Console.WriteLine($"{item.Product.Name} - Quantity: {item.Quantity} , Price: {item.Product.Price * item.Quantity} PLN"); // interpolacja stringow, wyswietla nazwe produktu, ilosc i calkowity koszt dla tego produktu (cena * ilosc)   
-        }
-    }    
-
-    public void CalculateTotal()
+    public decimal CalculateTotal()
     {
         decimal total = 0;
 
@@ -59,9 +43,9 @@ public class BasketService
         {
             total += item.Product.Price * item.Quantity;
         }
-        Console.WriteLine($"Total: {total} PLN");
+        return total;
     }        
-    
+
     public List<BasketItem> GetBasketItems()
     {
         return new List<BasketItem>(_basket); // zwraca nowa liste, ktora jest kopia listy _basket, dzieki temu zewnetrzne modyfikacje tej listy nie beda mialy wplywu na oryginalna liste _basket w klasie ShopService
