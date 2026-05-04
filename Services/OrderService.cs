@@ -1,14 +1,13 @@
-using System.Net.Http.Headers;
-using MiniShop.Services;
+using MiniShop.Models;
 
-namespace MiniShop.Models;
+namespace MiniShop.Services;
 
 public class OrderService
 {
     private List<Order> _orders = new List<Order>();
     private int _orderIdCounter = 1;
 
-    public List<Order> ShowOrderDetails()
+    public List<Order> GetOrderDetails()
     {
         return _orders;
     }

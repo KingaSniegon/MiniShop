@@ -1,5 +1,6 @@
 ﻿using Xunit;
 using MiniShop.Models;
+using MiniShop.Services;
 
 public class BasketServiceTests
 {

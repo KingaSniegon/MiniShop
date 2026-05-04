@@ -1,7 +1,6 @@
-using System.Net.Http.Headers;
-using MiniShop.Services;
+using MiniShop.Models;
 
-namespace MiniShop.Models;
+namespace MiniShop.Services;
 
 public class BasketService
 {
@@ -15,14 +14,14 @@ public class BasketService
 
     public List<BasketItem> AddToBasket(int productId, int quantity)
     {
-        var product = _productService.GetAllProducts().FirstOrDefault(p => p.Id == productId); // szuka produktu o podanym Id w liscie produktow dostepnych w sklepie
+        var product = _productService.GetAllProducts().FirstOrDefault(p => p.Id == productId);
         
         if (product == null)
         {
             throw new ArgumentException($"Product with id {productId} doesn't exist");
         }
 
-        var basketItem = _basket.FirstOrDefault(b => b.Product.Id == productId); // szuka w koszyku przedmiotu, ktory jest tym samym produktem co znaleziony produkt
+        var basketItem = _basket.FirstOrDefault(b => b.Product.Id == productId);
 
         if(basketItem == null)
         {
@@ -48,7 +47,7 @@ public class BasketService
 
     public List<BasketItem> GetBasketItems()
     {
-        return new List<BasketItem>(_basket); // zwraca nowa liste, ktora jest kopia listy _basket, dzieki temu zewnetrzne modyfikacje tej listy nie beda mialy wplywu na oryginalna liste _basket w klasie ShopService
+        return new List<BasketItem>(_basket);
     }
 
     public void ClearBasket()

@@ -1,6 +1,3 @@
-using System.Net.Http.Headers;
-using MiniShop.Services;
-
 namespace MiniShop.Models;
 
 public class OrderItem

@@ -7,13 +7,16 @@ class Menu
     private readonly BasketService _basketService;
     private readonly OrderService _orderService;
     private readonly ShopService _shopService;
+    private readonly ConsoleOutputService _consoleOutputService;
 
-    public Menu(ProductService productService, BasketService basketService, OrderService orderService, ShopService shopService)
+
+    public Menu(ProductService productService, BasketService basketService, OrderService orderService, ShopService shopService, ConsoleOutputService consoleOutputService)
     {
         _productService = productService;
         _basketService = basketService;
         _orderService = orderService;
         _shopService = shopService;
+        _consoleOutputService = consoleOutputService;
     }
 
     public bool ShowMenu()
@@ -30,13 +33,8 @@ class Menu
     switch (option)
     {
         case "1":
-            var products = _productService.GetAllProducts();
-            
-        Console.WriteLine("Available products:");
-        foreach(var product in products)
-        {
-            Console.WriteLine($"ID: {product.Id}, Name: {product.Name}, Price: {product.Price} PLN");
-        }
+            var productItems = _productService.GetAllProducts();
+            _consoleOutputService.ShowProducts(productItems);
             return true;
 
         case "2":
@@ -44,36 +42,15 @@ class Menu
             return true;
 
         case "3":
-
             var basketItems = _basketService.GetBasketItems();
-            if (basketItems.Count == 0)
-            {
-                Console.WriteLine("Your basket is empty.");
-            }
-            else
-            {
-                Console.WriteLine("Your basket contains:");
-                foreach (var item in basketItems)
-                {
-                    Console.WriteLine($"{item.Product.Name} - Quantity: {item.Quantity}, Total Price: {item.Product.Price * item.Quantity} PLN");
-                }
-                var total = _basketService.CalculateTotal();
-                Console.WriteLine($"Total: {total} PLN");
-            }
+            var total = _basketService.CalculateTotal();
+            _consoleOutputService.ShowBasket(basketItems, total);
             return true;
 
         case "4":
             _shopService.Checkout();
-            var orders = _orderService.ShowOrderDetails();
-                    foreach(var order in orders)
-        {
-            Console.WriteLine($"\nOrder ID: {order.Id}");
-            foreach(var item in order.OrderItems)
-            {
-                Console.WriteLine($"  {item.ProductName} - Quantity: {item.Quantity}, Unit Price: {item.UnitPrice} PLN, Total: {item.UnitPrice * item.Quantity} PLN");
-            }
-            Console.WriteLine($"Order total: {order.OrderItems.Sum(i => i.UnitPrice * i.Quantity)} PLN");
-        }
+            var order = _orderService.GetOrders();
+            _consoleOutputService.ShowOrders(order);
             return true;
 
         case "5":
