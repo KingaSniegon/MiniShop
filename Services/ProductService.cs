@@ -11,11 +11,16 @@ public class ProductService
         return _products.ToList();
     }
 
-    public void AddProduct(Product product)
+    public Product GetProductById(int productId)
+    {
+        return _products.FirstOrDefault(p => p.Id == productId);
+    }
+
+    public List<Product> AddProduct(Product product)
     {
         if (product == null)
         {
-            throw new ArgumentNullException(nameof(product));
+            throw new ArgumentNullException();
         }
 
         if (_products.Any(p => p.Id == product.Id))
@@ -24,5 +29,7 @@ public class ProductService
         }
 
         _products.Add(product);
+
+        return _products;
     }
 }

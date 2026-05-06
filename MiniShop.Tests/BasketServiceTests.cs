@@ -1,4 +1,6 @@
-﻿using Xunit;
+﻿using System;
+using System.Collections.Generic;
+using Xunit;
 using MiniShop.Models;
 using MiniShop.Services;
 
@@ -166,4 +168,53 @@ public class BasketServiceTests
 
         Assert.Equal(0, result);
     }
+
+    [Fact]
+    public void AddToBasket_LargeQuantity_ShouldaAddCorrectly()
+    {
+        // ARRANGE (przygotowanie)
+        var productService = new ProductService();
+        var basketService = new BasketService(productService);
+
+        var product = new Product
+        {
+            Id = 1,
+            Name = "Apple",
+            Price = 10
+        };
+
+        productService.AddProduct(product);
+
+        // ACT (działanie)
+        var result = basketService.AddToBasket(product.Id, 10000);
+
+        // ASSERT (sprawdzenie)
+        Assert.NotNull(result);
+        Assert.Single(result);
+        Assert.Contains(result, x => x.Product.Id == 1 && x.Product.Name == "Apple" && x.Quantity == 10000);
+    }     
+
+    [Fact]
+    public void AddToBasket_MinusQuantity_ShouldNotAddToBasket()
+    {
+        // ARRANGE (przygotowanie)
+        var productService = new ProductService();
+        var basketService = new BasketService(productService);
+
+        var product = new Product
+        {
+            Id = 1,
+            Name = "Apple",
+            Price = 10
+        };
+
+        productService.AddProduct(product);
+
+        // ACT (działanie)
+        var result = Assert.Throws<ArgumentException>(() =>
+        basketService.AddToBasket(1, -1));
+
+        // ASSERT (sprawdzenie)
+        Assert.Equal("Quantity must be greater than 0", result.Message);
+    }    
 }

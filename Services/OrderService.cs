@@ -6,11 +6,6 @@ public class OrderService
 {
     private List<Order> _orders = new List<Order>();
     private int _orderIdCounter = 1;
-
-    public List<Order> GetOrderDetails()
-    {
-        return _orders;
-    }
     
     public void AddOrder(Order order)
     {
@@ -20,6 +15,6 @@ public class OrderService
 
     public List<Order> GetOrders()
     {
-        return _orders;
+        return _orders.ToList();
     }
 }

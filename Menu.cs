@@ -1,4 +1,3 @@
-using MiniShop.Models;
 using MiniShop.Services;
 
 class Menu

@@ -23,6 +23,11 @@ public class BasketService
 
         var basketItem = _basket.FirstOrDefault(b => b.Product.Id == productId);
 
+        if(quantity <= 0)
+        {
+            throw new ArgumentException("Quantity must be greater than 0");
+        }
+
         if(basketItem == null)
         {
             _basket.Add(new BasketItem { Product = product, Quantity = quantity });
