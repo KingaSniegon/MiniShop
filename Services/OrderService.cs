@@ -4,7 +4,7 @@ namespace MiniShop.Services;
 
 public class OrderService
 {
-    private List<Order> _orders = new List<Order>();
+    private readonly List<Order> _orders = new List<Order>();
     private int _orderIdCounter = 1;
     
     public void AddOrder(Order order)
