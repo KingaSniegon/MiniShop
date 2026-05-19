@@ -1,8 +1,9 @@
 using MiniShop.Models;
+using MiniShop.Interfaces;
 
 namespace MiniShop.Services;
 
-public class OrderService
+public class OrderService : IOrderService
 {
     private readonly List<Order> _orders = new List<Order>();
     private int _orderIdCounter = 1;

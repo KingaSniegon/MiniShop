@@ -1,14 +1,15 @@
+using MiniShop.Interfaces;
 using MiniShop.Models;
 
 namespace MiniShop.Services;
 
-public class ShopService
+public class ShopService : IShopService
 {
-    private readonly BasketService _basketService;
-    private readonly OrderService _orderService;
+    private readonly IBasketService _basketService;
+    private readonly IOrderService _orderService;
     private readonly ConsoleInputService _consoleInputService;
 
-    public ShopService(BasketService basketService, OrderService orderService, ProductService productService, ConsoleInputService consoleInputService)
+    public ShopService(IBasketService basketService, IOrderService orderService, IProductService productService, ConsoleInputService consoleInputService)
     {
         _basketService = basketService;
         _orderService = orderService;
@@ -16,7 +17,7 @@ public class ShopService
 
     }
 
-     public void AddProductsToBasket()
+    public void AddProductsToBasket()
     {
          while (true)
     {

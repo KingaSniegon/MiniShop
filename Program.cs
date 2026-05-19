@@ -1,4 +1,5 @@
-﻿using MiniShop.Models;
+﻿using MiniShop.Interfaces;
+using MiniShop.Models;
 using MiniShop.Services;
 
 class Program
@@ -8,10 +9,10 @@ static void Main(string[] args)
 {
         var consoleInputService = new ConsoleInputService();
         var consoleOutputService = new ConsoleOutputService();
-        var productService = new ProductService();
-        var basketService = new BasketService(productService);
-        var orderService = new OrderService();
-        var shopService = new ShopService(basketService, orderService, productService, consoleInputService);
+        IProductService productService = new ProductService();
+        IBasketService basketService = new BasketService(productService);
+        IOrderService orderService = new OrderService();
+        IShopService shopService = new ShopService(basketService, orderService, productService, consoleInputService);
         var menu = new Menu(productService, basketService, orderService, shopService, consoleOutputService);
 
         productService.AddProduct(new Product { Id = 1, Name = "Laptop", Price = 3000, Stock = 5 });

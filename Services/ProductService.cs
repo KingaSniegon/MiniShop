@@ -1,8 +1,9 @@
 using MiniShop.Models;
+using MiniShop.Interfaces;
 
 namespace MiniShop.Services;
 
-public class ProductService
+public class ProductService : IProductService
 {
     private readonly List<Product> _products = new();
 

@@ -1,13 +1,14 @@
 using MiniShop.Models;
+using MiniShop.Interfaces;
 
 namespace MiniShop.Services;
 
-public class BasketService
+public class BasketService : IBasketService
 {
     private List<BasketItem> _basket = new List<BasketItem>(); 
-    private readonly ProductService _productService;
+    private readonly IProductService _productService;
 
-    public BasketService(ProductService productService)
+    public BasketService(IProductService productService)
     {
         _productService = productService;
     }

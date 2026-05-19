@@ -1,15 +1,16 @@
 using MiniShop.Services;
+using MiniShop.Interfaces;
 
 class Menu
 {
-    private readonly ProductService _productService;
-    private readonly BasketService _basketService;
-    private readonly OrderService _orderService;
-    private readonly ShopService _shopService;
+    private readonly IProductService _productService;
+    private readonly IBasketService _basketService;
+    private readonly IOrderService _orderService;
+    private readonly IShopService _shopService;
     private readonly ConsoleOutputService _consoleOutputService;
 
 
-    public Menu(ProductService productService, BasketService basketService, OrderService orderService, ShopService shopService, ConsoleOutputService consoleOutputService)
+    public Menu(IProductService productService, IBasketService basketService, IOrderService orderService, IShopService shopService, ConsoleOutputService consoleOutputService)
     {
         _productService = productService;
         _basketService = basketService;
