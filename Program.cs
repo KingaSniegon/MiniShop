@@ -13,7 +13,7 @@ static void Main(string[] args)
         IBasketService basketService = new BasketService(productService);
         IOrderService orderService = new OrderService();
         IShopService shopService = new ShopService(basketService, orderService, productService, consoleInputService);
-        var menu = new Menu(productService, basketService, orderService, shopService, consoleOutputService);
+        var menu = new Menu(productService, basketService, orderService, shopService, consoleOutputService, consoleInputService);
 
         productService.AddProduct(new Product { Id = 1, Name = "Laptop", Price = 3000, Stock = 5 });
         productService.AddProduct(new Product { Id = 2, Name = "Mouse", Price = 100, Stock = 20 });

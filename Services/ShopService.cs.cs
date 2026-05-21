@@ -38,22 +38,9 @@ public class ShopService : IShopService
         var basketItems = _basketService.GetBasketItems();
         if (basketItems.Count == 0)
         {
-            Console.WriteLine("Basket is empty. Cannot proceed to checkout.");
             return;
         }
-        
-        var order = new Order();
-        foreach(var item in basketItems)
-        {
-
-            var orderItem = new OrderItem
-            {
-                ProductName = item.Product.Name ?? "Unknown Product Name",
-                UnitPrice = item.Product.Price,
-                Quantity = item.Quantity
-            };
-            order.OrderItems.Add(orderItem);
-        }
-        _orderService.AddOrder(order);
+        _orderService.CreateOrder(basketItems);
+        _basketService.ClearBasket();
     }
 }

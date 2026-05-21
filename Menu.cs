@@ -8,25 +8,28 @@ class Menu
     private readonly IOrderService _orderService;
     private readonly IShopService _shopService;
     private readonly ConsoleOutputService _consoleOutputService;
+    private readonly ConsoleInputService _consoleInputService;
 
 
-    public Menu(IProductService productService, IBasketService basketService, IOrderService orderService, IShopService shopService, ConsoleOutputService consoleOutputService)
+    public Menu(IProductService productService, IBasketService basketService, IOrderService orderService, IShopService shopService, ConsoleOutputService consoleOutputService, ConsoleInputService consoleInputService)
     {
         _productService = productService;
         _basketService = basketService;
         _orderService = orderService;
         _shopService = shopService;
         _consoleOutputService = consoleOutputService;
+        _consoleInputService = consoleInputService;
     }
 
     public bool ShowMenu()
     {
-        Console.WriteLine("Welcome to MiniShop!");
         Console.WriteLine("1. View products");
         Console.WriteLine("2. Add product to basket");
         Console.WriteLine("3. View basket");
-        Console.WriteLine("4. Place order");
-        Console.WriteLine("5. Exit");
+        Console.WriteLine("4. Remove product from the basket");
+        Console.WriteLine("5. Change quantity of product");
+        Console.WriteLine("6. Place order");
+        Console.WriteLine("7. Exit");
         Console.WriteLine("Please select an option: ");
         var option = Console.ReadLine();
 
@@ -48,12 +51,22 @@ class Menu
             return true;
 
         case "4":
+            var productId = _consoleInputService.ReadProductId();
+            _basketService.RemoveFromBasket(productId);
+            return true;
+
+        case "5":
+            var productIdForQuantity = _consoleInputService.ReadProductId();
+            var quantity = _consoleInputService.ReadQuantity();
+            _basketService.UpdateQuantity(productIdForQuantity, quantity);
+            return true;
+        case "6":
             _shopService.Checkout();
             var order = _orderService.GetOrders();
             _consoleOutputService.ShowOrders(order);
             return true;
 
-        case "5":
+        case "7":
             Console.WriteLine("Thank you for shopping!");
             return false;
 
